@@ -84,15 +84,17 @@ class Forest
 
 Console.WriteLine("Dating App v 1");
 
-Profile profile = new Profile("Kyle", 29, "k", "lk");
+//test profiles
+Profile profile = new Profile("Kyle", 29, "Las Vegas", "America", "Him");
+Profile user1 = new Profile("Sandy", 16, "K", "See", "Him");
+Console.WriteLine(user1.Age);
 
-profile.Age = 28;
-Console.WriteLine(profile.Age);
-Console.WriteLine(profile.Pronouns);
+//setting hobbies through method and placing them in an array
+user1.SetHobbies(new string[] { "this is hobbie1", "this is hobbie 2" });
+//method returns the user profile
+user1.ViewProfile();
 
-profile.SetHobbies(new string[] {"test", "test2", "test3" });
-profile.ViewProfile();
-
+//our class
 public class Profile
 {
     //fields
@@ -121,27 +123,41 @@ public class Profile
 
     //properties
     public string Name { get { return name; } set { name = value; } }
-    public int Age { get { return age; } set { age = value; } }
+    public int Age { get { return age; } set 
+        {
+            if (value >= 18)
+            {
+                age = value;
+            }
+            else { Console.Write("User is not old enough"); }
+        } 
+    }
     public string City { get { return city; } set { city = value; } }
     public string Country { get { return country; } set { country = value; } }
     public string Pronouns { get { return pronouns; } set { pronouns = value; } }
     public string[] Hobbies { get { return hobbies;} set { hobbies = value; } }
 
     //methods
-    public string ViewProfile()
-    {
-        string bio = $"{Name}, {Age}, {City}, {Country} ";
-        Console.WriteLine(bio);
-        foreach (string hobbie in hobbies)
-        {
-            Console.WriteLine(hobbie);
-        }
-        return bio;
-    }
-
+    //this method sets our hobbies to an array
     public void SetHobbies(string[] hobbies)
     {
         this.Hobbies = hobbies;
 
     }
+    //This method gives us a breakdown of the user profile
+    public string ViewProfile()
+    {
+        Console.WriteLine("\nProfile");
+        Console.WriteLine("----------");
+        string bio = $"{Name}, {Age}, {City}, {Country} ";
+        Console.WriteLine(bio);
+        Console.WriteLine("\nHobbies");
+        Console.WriteLine("----------");
+        foreach (string hobbie in Hobbies)
+        {
+            Console.WriteLine($"{hobbie}");
+        }
+        return bio;
+    }
+
 }
